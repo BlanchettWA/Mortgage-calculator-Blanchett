@@ -1,17 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_data_entry"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="tk.wablanchett.mortgage_calculator_blanchett.DataEntry">
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
-</RelativeLayout>
+        android:inputType="numberDecimal"
+        android:ems="10"
+        tools:layout_editor_absoluteY="16dp"
+        tools:layout_editor_absoluteX="16dp"
+        android:id="@+id/homeValue"
+        android:hint="Enter Home Value..." />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        tools:layout_editor_absoluteY="82dp"
+        tools:layout_editor_absoluteX="16dp"
+        android:id="@+id/loanAmount"
+        android:hint="Enter Loan Amount..." />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        tools:layout_editor_absoluteY="149dp"
+        tools:layout_editor_absoluteX="16dp"
+        android:id="@+id/interestRate"
+        android:hint="Enter Interest Rate..." />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        tools:layout_editor_absoluteY="209dp"
+        tools:layout_editor_absoluteX="24dp"
+        android:id="@+id/loanTerm"
+        android:hint="Enter Loan Term" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        tools:layout_editor_absoluteY="272dp"
+        tools:layout_editor_absoluteX="26dp"
+        android:id="@+id/propertyTax"
+        android:hint="Enter Property Tax" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/monthlyHOA"
+        android:hint="Enter Monthly HOA"
+        tools:layout_editor_absoluteY="418dp"
+        tools:layout_editor_absoluteX="26dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        tools:layout_editor_absoluteY="343dp"
+        tools:layout_editor_absoluteX="26dp"
+        android:id="@+id/insurancePerYear"
+        android:hint="Enter Insurance Per Year" />
+</android.support.constraint.ConstraintLayout>
