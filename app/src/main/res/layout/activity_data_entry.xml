@@ -8,72 +8,182 @@
     tools:context="tk.wablanchett.mortgage_calculator_blanchett.DataEntry">
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="77dp"
+        android:layout_height="37dp"
         android:inputType="numberDecimal"
         android:ems="10"
-        tools:layout_editor_absoluteY="16dp"
-        tools:layout_editor_absoluteX="16dp"
         android:id="@+id/homeValue"
-        android:hint="Enter Home Value..." />
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="432dp"
+        android:hint="Amount" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="83dp"
+        android:layout_height="37dp"
         android:inputType="numberDecimal"
         android:ems="10"
-        tools:layout_editor_absoluteY="82dp"
-        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="42dp"
+        tools:layout_editor_absoluteX="142dp"
         android:id="@+id/loanAmount"
-        android:hint="Enter Loan Amount..." />
+        android:hint="Amount" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="79dp"
+        android:layout_height="37dp"
         android:inputType="numberDecimal"
         android:ems="10"
-        tools:layout_editor_absoluteY="149dp"
-        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="42dp"
+        tools:layout_editor_absoluteX="273dp"
         android:id="@+id/interestRate"
-        android:hint="Enter Interest Rate..." />
+        android:hint="Amount" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
         android:inputType="number"
         android:ems="10"
-        tools:layout_editor_absoluteY="209dp"
-        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="144dp"
+        tools:layout_editor_absoluteX="261dp"
         android:id="@+id/loanTerm"
-        android:hint="Enter Loan Term" />
+        android:hint="Length" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="99dp"
+        android:layout_height="39dp"
         android:inputType="numberDecimal"
         android:ems="10"
-        tools:layout_editor_absoluteY="272dp"
-        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="230dp"
+        tools:layout_editor_absoluteX="261dp"
         android:id="@+id/propertyTax"
-        android:hint="Enter Property Tax" />
+        android:hint="Amount" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="103dp"
+        android:layout_height="44dp"
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/monthlyHOA"
         android:hint="Enter Monthly HOA"
-        tools:layout_editor_absoluteY="418dp"
-        tools:layout_editor_absoluteX="26dp" />
+        tools:layout_editor_absoluteY="334dp"
+        tools:layout_editor_absoluteX="184dp" />
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="88dp"
+        android:layout_height="44dp"
         android:inputType="numberDecimal"
         android:ems="10"
-        tools:layout_editor_absoluteY="343dp"
-        tools:layout_editor_absoluteX="26dp"
+        tools:layout_editor_absoluteY="334dp"
+        tools:layout_editor_absoluteX="24dp"
         android:id="@+id/insurancePerYear"
         android:hint="Enter Insurance Per Year" />
+
+    <TextView
+        android:text="Home Value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        tools:layout_editor_absoluteY="16dp"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:text="Loan Amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="16dp"
+        tools:layout_editor_absoluteX="142dp"
+        android:id="@+id/textView2" />
+
+    <TextView
+        android:text="Interest Rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="16dp"
+        tools:layout_editor_absoluteX="273dp"
+        android:id="@+id/textView3" />
+
+    <TextView
+        android:text="Loan Term"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="119dp"
+        tools:layout_editor_absoluteX="294dp"
+        android:id="@+id/textView4" />
+
+    <DatePicker
+        android:layout_width="219dp"
+        android:layout_height="107dp"
+        tools:layout_editor_absoluteY="131dp"
+        tools:layout_editor_absoluteX="16dp"
+        android:id="@+id/datePicker"
+        android:calendarViewShown="false"
+        android:datePickerMode="spinner" />
+
+    <TextView
+        android:text="Start Date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="111dp"
+        tools:layout_editor_absoluteX="93dp"
+        android:id="@+id/textView5" />
+
+    <TextView
+        android:text="Property Tax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="205dp"
+        tools:layout_editor_absoluteX="282dp"
+        android:id="@+id/textView6" />
+
+    <TextView
+        android:text="Insurance per Year"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="309dp"
+        tools:layout_editor_absoluteX="24dp"
+        android:id="@+id/textView7" />
+
+    <TextView
+        android:text="Monthly HOA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteY="309dp"
+        tools:layout_editor_absoluteX="184dp"
+        android:id="@+id/textView8" />
+
+    <Button
+        android:text="Calculate Payment Summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:text="Calculate Mortgage Summary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.87"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginLeft="16dp" />
 </android.support.constraint.ConstraintLayout>
