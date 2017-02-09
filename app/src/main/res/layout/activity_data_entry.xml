@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--The constraint values aren't extracted out because individually designed for each element.-->
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -16,16 +18,16 @@
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="432dp"
-        android:hint="Amount"
+        android:hint="$$$$"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.65999997" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/homevaluelabel"
+        app:layout_constraintBottom_toTopOf="@+id/datePicker"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:layout_width="83dp"
@@ -33,17 +35,19 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/loanAmount"
-        android:hint="Amount"
-        app:layout_constraintBottom_toBottomOf="@+id/paymentSummaryButton"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:hint="$$$$"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
-        app:layout_constraintVertical_bias="0.04000002" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/loanamountlabel"
+        app:layout_constraintHorizontal_bias="0.54"
+        app:layout_constraintBottom_toTopOf="@+id/datePicker"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:layout_width="79dp"
@@ -51,10 +55,7 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/interestRate"
-        android:hint="Amount"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/paymentSummaryButton"
+        android:hint="%"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
@@ -62,7 +63,11 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="16dp"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintVertical_bias="0.04000002" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/interestRateLabel"
+        app:layout_constraintBottom_toTopOf="@+id/loanTermLabel"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:layout_width="100dp"
@@ -70,19 +75,18 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/loanTerm"
-        android:hint="Length"
+        android:hint="Years"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintVertical_bias="0.29000002" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/loanTermLabel"
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/datePicker"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <EditText
         android:layout_width="99dp"
@@ -90,27 +94,27 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/propertyTax"
-        android:hint="Amount"
-        app:layout_constraintBottom_toBottomOf="@+id/paymentSummaryButton"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:hint="%"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
-        app:layout_constraintHorizontal_bias="1.0" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/propertyTaxLabel"
+        app:layout_constraintVertical_bias="0.0" />
 
     <EditText
         android:layout_width="126dp"
-        android:layout_height="52dp"
+        android:layout_height="41dp"
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/monthlyHOA"
-        android:hint="Amount"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:hint="$$$$"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
@@ -119,8 +123,10 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
-        app:layout_constraintHorizontal_bias="0.72"
-        app:layout_constraintVertical_bias="0.72" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/monthlyHOALabel"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.85" />
 
     <EditText
         android:layout_width="116dp"
@@ -128,19 +134,19 @@
         android:inputType="numberDecimal"
         android:ems="10"
         android:id="@+id/insurancePerYear"
-        android:hint="Amount"
+        android:hint="$$$$/year"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="16dp"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.01"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.71000004" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/insurancePerYearLabel"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:text="Home Value"
@@ -154,17 +160,23 @@
         android:layout_marginLeft="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        app:layout_constraintRight_toRightOf="@+id/propertyTax"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <TextView
         android:text="Loan Amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/loanamountlabel"
-        tools:layout_editor_absoluteY="16dp"
-        tools:layout_editor_absoluteX="151dp" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="56dp"
+        app:layout_constraintLeft_toRightOf="@+id/homevaluelabel"
+        app:layout_constraintRight_toLeftOf="@+id/interestRateLabel"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <TextView
         android:text="Interest Rate"
@@ -195,11 +207,11 @@
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        app:layout_constraintHorizontal_bias="0.88"
+        app:layout_constraintHorizontal_bias="0.94"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/interestRateLabel"
         app:layout_constraintVertical_bias="0.22000003" />
 
     <DatePicker
@@ -226,44 +238,38 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/datePicker"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/homeValue"
+        app:layout_constraintRight_toLeftOf="@+id/loanTermLabel"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="16dp"
-        app:layout_constraintHorizontal_bias="0.25"
-        app:layout_constraintVertical_bias="0.22000003" />
+        app:layout_constraintHorizontal_bias="0.43"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:text="Property Tax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/propertyTaxLabel"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
-        app:layout_constraintHorizontal_bias="0.93"
-        app:layout_constraintVertical_bias="0.44" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/loanTerm"
+        app:layout_constraintVertical_bias="0.06"
+        android:layout_marginStart="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/datePicker" />
 
     <TextView
         android:text="Insurance per Year"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/insurancePerYearLabel"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
@@ -272,16 +278,16 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.63" />
+        app:layout_constraintHorizontal_bias="0.02"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/datePicker"
+        app:layout_constraintVertical_bias="0.22" />
 
     <TextView
         android:text="Monthly HOA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/monthlyHOALabel"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="16dp"
         android:layout_marginStart="16dp"
@@ -290,8 +296,10 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginRight="16dp"
-        app:layout_constraintHorizontal_bias="0.6"
-        app:layout_constraintVertical_bias="0.62" />
+        app:layout_constraintHorizontal_bias="0.75"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/propertyTax"
+        app:layout_constraintVertical_bias="0.13" />
 
     <Button
         android:text="Calculate Payment Summary"
@@ -316,15 +324,13 @@
         android:layout_height="wrap_content"
         android:id="@+id/mortgageSummaryButton"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.87"
+        android:layout_marginBottom="72dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginRight="16dp"
         android:layout_marginStart="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginLeft="16dp" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>
