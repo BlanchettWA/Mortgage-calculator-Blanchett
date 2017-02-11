@@ -51,18 +51,20 @@ public class DataEntry extends AppCompatActivity {
     boolean iPYassign = false;
 
 
-
     DatePicker pickDate;
     Calendar calendar;
     TextView startDate;
 
+    int startMonth;
+    int startYear;
+
 public void upDateLabel(){
     if (lTassigned){
-        startDate.setText((calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR) + " to " + (calendar.get(Calendar.MONTH) + 1) + "/" + (calendar.get(Calendar.YEAR) + loanTerm));
+        startDate.setText(startMonth + "/" + calendar.get(Calendar.YEAR) + " to " + startMonth + "/" + (calendar.get(Calendar.YEAR) + loanTerm));
     }
     else
     {
-        startDate.setText((calendar.get(Calendar.MONTH) + 1) + "/" + calendar.get(Calendar.YEAR) + " to...");
+        startDate.setText(startMonth + "/" + calendar.get(Calendar.YEAR) + " to...");
     }
 
 }
@@ -72,36 +74,6 @@ public void upDateLabel(){
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_entry);
-/**
- Intent transvalue = getIntent();
- transvalue.getDoubleExtra("HV",homeValue);
- transvalue.getDoubleExtra("LA",loanAmount);
- transvalue.getDoubleExtra("IR",interestRate);
- transvalue.getIntExtra("LT",loanTerm);
- transvalue.getIntExtra("SM",startMonth);
- transvalue.getIntExtra("SY",startYear);
- transvalue.getDoubleExtra("PT",propertyTax);
- transvalue.getDoubleExtra("IPY",insurancePerYear);
- transvalue.getDoubleExtra("MHOA",monthlyHOA);
-
- */
-        Intent restore = getIntent();
-
-        startDate = (TextView) findViewById(R.id.startDateLabel);
-        calendar = Calendar.getInstance();
-        pickDate = (DatePicker) findViewById(R.id.datePicker);
-        upDateLabel();
-        pickDate.init(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
-            @Override
-            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                calendar.set(year, monthOfYear, dayOfMonth);
-                upDateLabel();
-            }
-        });
-
-        System.out.println(pickDate.getMonth());
-        System.out.println(pickDate.getYear());
-        System.out.println("THIS WAS A TEST ______________________________");
 
         gotoMortgageSummary = (Button) findViewById(R.id.mortgageSummaryButton);
         gotoPaymentSummary = (Button) findViewById(R.id.paymentSummaryButton);
@@ -204,7 +176,7 @@ public void upDateLabel(){
                 interestRate = Double.valueOf(("0" + s.toString()));
                 iRassign = true;
             }
-                else{iRassign = false; interestRate = 0;}
+            else{iRassign = false; interestRate = 0;}
 
                 System.out.print("Set the value to ");
                 System.out.println(interestRate + "and" + iRassign);
@@ -274,7 +246,7 @@ public void upDateLabel(){
 
             @Override
             public void afterTextChanged(Editable s) {
-            if (s.length() > 0){ insurancePerYear = Double.valueOf(("0" + s.toString())); iPYassign = true;}
+                if (s.length() > 0){ insurancePerYear = Double.valueOf(("0" + s.toString())); iPYassign = true;}
                 else{insurancePerYear = 0; iPYassign = false;}
 
                 System.out.print("Set the value to ");
@@ -282,19 +254,101 @@ public void upDateLabel(){
             }
         });
 
+        startDate = (TextView) findViewById(R.id.startDateLabel);
+        calendar = Calendar.getInstance();
+        pickDate = (DatePicker) findViewById(R.id.datePicker);
+
+
+        Intent restore = getIntent();
+
+        if (restore.hasExtra("HV")){
+            homeValue = restore.getDoubleExtra("HV",homeValue);
+            hVassigned = true;
+            hVEdit.setText(Double.toString(homeValue));
+        }
+
+        if (restore.hasExtra("LA")){
+            loanAmount = restore.getDoubleExtra("LA",loanAmount);
+            lAassigned = true;
+            lAEdit.setText(Double.toString(loanAmount));
+        }
+
+        if (restore.hasExtra("IR")){
+            interestRate = restore.getDoubleExtra("IR",interestRate);
+            iRassign = true;
+            iREdit.setText(Double.toString(interestRate));
+        }
+
+        if (restore.hasExtra("LT")){
+            loanTerm = restore.getIntExtra("LT",loanTerm);
+            lTassigned = true;
+            lTEdit.setText(Integer.toString(loanTerm));
+        }
+
+        if (restore.hasExtra("SM") && restore.hasExtra("SY")){
+
+            startMonth = restore.getIntExtra("SM",startMonth);
+            startYear = restore.getIntExtra("SY",startYear);
+            pickDate.init(startYear, (startMonth - 1), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    startMonth = (monthOfYear + 1);
+                    startYear = year;
+                    calendar.set(startYear,(startMonth - 1),dayOfMonth);
+                    upDateLabel();
+                }
+            });
+
+        }
+        else
+        {
+            startMonth = (calendar.get(Calendar.MONTH) + 1);
+            startYear = calendar.get(Calendar.YEAR);
+            pickDate.init(startYear, (startMonth - 1), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    startMonth = (monthOfYear + 1);
+                    startYear = year;
+                    calendar.set(startYear,(startMonth - 1),dayOfMonth);
+                    upDateLabel();
+                }
+            });
+
+        }
+
+        if (restore.hasExtra("PT"))
+        {
+            propertyTax = restore.getDoubleExtra("PT",propertyTax);
+            pTassign = true;
+            pTEdit.setText(Double.toString(propertyTax));
+
+        }
+
+        if (restore.hasExtra("IPY")){
+            insurancePerYear = restore.getDoubleExtra("IPY",insurancePerYear);
+            iPYassign = true;
+            iPYEdit.setText(Double.toString(insurancePerYear));
+        }
+
+        if (restore.hasExtra("MHOA")){
+          monthlyHOA = restore.getDoubleExtra("MHOA",monthlyHOA);
+            mHOAassign = true;
+            mHOWEdit.setText(Double.toString(monthlyHOA));
+        }
+
         gotoMortgageSummary.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if ((hVassigned && lAassigned && lTassigned && iRassign && pTassign && mHOAassign && iPYassign) == true)
+                if (hVassigned && lAassigned && lTassigned && iRassign && pTassign && mHOAassign && iPYassign)
                 {
                     Intent mortgageSummary = new Intent(DataEntry.this, MortgageSummary.class);
                     mortgageSummary.putExtra("HV",homeValue);
                     mortgageSummary.putExtra("LA", loanAmount);
                     mortgageSummary.putExtra("IR",interestRate);
                     mortgageSummary.putExtra("LT",loanTerm);
-                    mortgageSummary.putExtra("SM",(pickDate.getMonth() + 1));
-                    mortgageSummary.putExtra("SY", (pickDate.getYear()));
+                    mortgageSummary.putExtra("SM",startMonth);
+                    mortgageSummary.putExtra("SY", startYear);
                     mortgageSummary.putExtra("PT", propertyTax);
                     mortgageSummary.putExtra("IPY", insurancePerYear);
                     mortgageSummary.putExtra("MHOA", monthlyHOA);
@@ -315,15 +369,15 @@ public void upDateLabel(){
             public void onClick(View v)
             {
 
-                if ((hVassigned && lAassigned && lTassigned && iRassign && pTassign && mHOAassign && iPYassign) == true)
+                if (hVassigned && lAassigned && lTassigned && iRassign && pTassign && mHOAassign && iPYassign)
                 {
                     Intent paymentSummary = new Intent(DataEntry.this, PaymentSummary.class);
                     paymentSummary.putExtra("HV",homeValue);
                     paymentSummary.putExtra("LA", loanAmount);
                     paymentSummary.putExtra("IR",interestRate);
                     paymentSummary.putExtra("LT",loanTerm);
-                    paymentSummary.putExtra("SM",(pickDate.getMonth() + 1));
-                    paymentSummary.putExtra("SY", (pickDate.getYear()));
+                    paymentSummary.putExtra("SM", startMonth);
+                    paymentSummary.putExtra("SY", startYear);
                     paymentSummary.putExtra("PT", propertyTax);
                     paymentSummary.putExtra("IPY", insurancePerYear);
                     paymentSummary.putExtra("MHOA", monthlyHOA);
