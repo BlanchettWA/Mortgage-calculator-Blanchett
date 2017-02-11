@@ -1,11 +1,14 @@
 package tk.wablanchett.mortgage_calculator_blanchett;
 
 import android.content.Intent;
+import android.icu.math.BigDecimal;
+import android.icu.text.DecimalFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class MortgageSummary extends AppCompatActivity {
 
@@ -27,6 +30,17 @@ public class MortgageSummary extends AppCompatActivity {
     double mnthFee;
     double totalMortgage;
 
+    TextView mI;
+    TextView yT;
+    TextView sMF;
+    TextView tMC;
+    TextView tMP;
+    TextView pD;
+
+    public double niceFormat(double value){
+        DecimalFormat format = new DecimalFormat("#.##");
+        return Double.valueOf(format.format(value));
+    }
     public double monthlyInsurance(double iPY){return (iPY/12.00);}
 
     public double yearlyTax(double homeValue, double propertyTax)
@@ -37,7 +51,7 @@ public class MortgageSummary extends AppCompatActivity {
 
     public double feesPerMonth(double yearlyTax, double monthlyHOA, double monthlyInsurance)
     {
-        return (yearlyTax + monthlyHOA + monthlyInsurance);
+        return ((yearlyTax/12.00) + monthlyHOA + monthlyInsurance);
     }
 
     public double mortgageTotal(double loanAmount, double interestRate, int loanTerm)
@@ -57,6 +71,8 @@ public class MortgageSummary extends AppCompatActivity {
 
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +88,34 @@ public class MortgageSummary extends AppCompatActivity {
         insurancePerYear = transvalue.getDoubleExtra("IPY",insurancePerYear);
         monthlyHOA = transvalue.getDoubleExtra("MHOA",monthlyHOA);
 
+
+        mI = (TextView) findViewById(R.id.monthlyIns);
+        yT = (TextView) findViewById(R.id.yearTaxbox);
+        sMF = (TextView) findViewById(R.id.monthlyFees);
+        tMC = (TextView) findViewById(R.id.totalMortgage);
+        tMP = (TextView) findViewById(R.id.monthlypayment);
+        pD = (TextView) findViewById(R.id.payoffdate);
+
+
         toDataEntry = (Button) findViewById(R.id.dataEntryButton);
         toPaymentSummary = (Button) findViewById(R.id.paymentSummaryButton);
+
+        mIns = monthlyInsurance(insurancePerYear);
+        yrTx = yearlyTax(homeValue,propertyTax);
+        mnthFee = feesPerMonth(yrTx,monthlyHOA,mIns);
+        totalMortgage = mortgageTotal(loanAmount,interestRate,loanTerm);
+
+        mI.setText("Insurance per Month: $" + Double.toString(niceFormat(mIns)));
+        yT.setText("Yearly Taxes: $" + Double.toString(niceFormat(yrTx)));
+        sMF.setText("Loan-less costs: $" + Double.toString(niceFormat(mnthFee)));
+        tMC.setText("Total Mortgage: $" + Double.toString(niceFormat(totalMortgage)));
+        tMP.setText("Total Monthly Payment: $" + Double.toString(niceFormat(totalMonthlyPayment(mnthFee,totalMortgage,loanTerm))));
+        pD.setText("Mortgage paid by: " + Integer.toString(startMonth) + "/" + Integer.toString(startYear + loanTerm));
+
+
+
+
+
 
         toDataEntry.setOnClickListener(new View.OnClickListener() {
             @Override
