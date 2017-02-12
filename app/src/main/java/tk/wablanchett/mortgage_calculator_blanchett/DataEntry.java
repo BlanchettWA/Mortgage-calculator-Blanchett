@@ -396,6 +396,102 @@ public void upDateLabel(){
 
     } //end of onCreate
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState)
+    {
+        super.onSaveInstanceState(outState);
 
+        if (hVassigned)
+            outState.putDouble("HV",homeValue);
+
+        if (lAassigned)
+            outState.putDouble("LA", loanAmount);
+
+        if (iRassign)
+            outState.putDouble("IR",interestRate);
+
+        if (lTassigned)
+            outState.putInt("LT",loanTerm);
+
+
+        outState.putInt("SM",startMonth);
+
+        outState.putInt("SY", startYear);
+
+        if (pTassign)
+            outState.putDouble("PT", propertyTax);
+
+        if (iPYassign)
+            outState.putDouble("IPY", insurancePerYear);
+
+        if (mHOAassign)
+            outState.putDouble("MHOA", monthlyHOA);
+
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        if (savedInstanceState.containsKey("HV"))
+        {
+            homeValue = savedInstanceState.getDouble("HV", homeValue);
+            hVassigned = true;
+            hVEdit.setText(Double.toString(homeValue));
+        }
+
+        if (savedInstanceState.containsKey("LA")){
+
+            loanAmount = savedInstanceState.getDouble("LA",loanAmount);
+            lAassigned = true;
+            lAEdit.setText(Double.toString(loanAmount));
+        }
+
+        if (savedInstanceState.containsKey("IR")){
+            interestRate = savedInstanceState.getDouble("IR",interestRate);
+            iRassign = true;
+            iREdit.setText(Double.toString(interestRate));
+        }
+
+        if (savedInstanceState.containsKey("LT"))
+        {
+
+                loanTerm = savedInstanceState.getInt("LT",loanTerm);
+                lTassigned = true;
+                lTEdit.setText(Integer.toString(loanTerm));
+        }
+
+        if (savedInstanceState.containsKey("PT")){
+            propertyTax = savedInstanceState.getDouble("PT",propertyTax);
+            pTassign = true;
+            pTEdit.setText(Double.toString(propertyTax));
+        }
+
+        if (savedInstanceState.containsKey("IPY")){
+            insurancePerYear = savedInstanceState.getDouble("IPY",insurancePerYear);
+            iPYassign = true;
+            iPYEdit.setText(Double.toString(insurancePerYear));
+        }
+
+        if (savedInstanceState.containsKey("MHOA")){
+            monthlyHOA = savedInstanceState.getDouble("MHOA",monthlyHOA);
+            mHOAassign = true;
+            mHOWEdit.setText(Double.toString(monthlyHOA));
+        }
+
+        startMonth = savedInstanceState.getInt("SM", startMonth);
+        startYear = savedInstanceState.getInt("SY", startYear);
+
+        pickDate.init(startYear, (startMonth - 1), calendar.get(Calendar.DAY_OF_MONTH), new DatePicker.OnDateChangedListener() {
+            @Override
+            public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                startMonth = (monthOfYear + 1);
+                startYear = year;
+                calendar.set(startYear,(startMonth - 1),dayOfMonth);
+                upDateLabel();
+            }
+        });
+
+    }
 
 } //end of class

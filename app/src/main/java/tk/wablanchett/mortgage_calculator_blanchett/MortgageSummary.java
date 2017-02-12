@@ -60,7 +60,7 @@ public class MortgageSummary extends AppCompatActivity {
         int numpayments = loanTerm * 12;
 
         double waypoint = (loanAmount * (monthlyInterest * (Math.pow((1 + monthlyInterest),numpayments))));
-        return (waypoint / ((Math.pow((1 + monthlyInterest),numpayments)) -1 ));
+        return (loanAmount + (waypoint / ((Math.pow((1 + monthlyInterest),numpayments)) -1 )));
     }
 
     public double totalMonthlyPayment(double monthlyFee, double totalMortgage, int loanTerm)
@@ -158,6 +158,46 @@ public class MortgageSummary extends AppCompatActivity {
 
 
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putDouble("HV",homeValue);
+        outState.putDouble("LA", loanAmount);
+        outState.putDouble("IR",interestRate);
+        outState.putInt("LT",loanTerm);
+        outState.putInt("SM",startMonth);
+        outState.putInt("SY", startYear);
+        outState.putDouble("PT", propertyTax);
+        outState.putDouble("IPY", insurancePerYear);
+        outState.putDouble("MHOA", monthlyHOA);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        homeValue = savedInstanceState.getDouble("HV", homeValue);
+        loanAmount = savedInstanceState.getDouble("LA", loanAmount);
+        interestRate = savedInstanceState.getDouble("IR", interestRate);
+        loanTerm = savedInstanceState.getInt("LT", loanTerm);
+        startMonth = savedInstanceState.getInt("SM", startMonth);
+        startYear = savedInstanceState.getInt("SY", startYear);
+        propertyTax = savedInstanceState.getDouble("PT", propertyTax);
+        insurancePerYear = savedInstanceState.getDouble("IPY", insurancePerYear);
+        monthlyHOA = savedInstanceState.getDouble("MHOA", monthlyHOA);
+
+        mIns = monthlyInsurance(insurancePerYear);
+        yrTx = yearlyTax(homeValue,propertyTax);
+        mnthFee = feesPerMonth(yrTx,monthlyHOA,mIns);
+        totalMortgage = mortgageTotal(loanAmount,interestRate,loanTerm);
+
+        mI.setText("Insurance per Month: $" + Double.toString(niceFormat(mIns)));
+        yT.setText("Yearly Taxes: $" + Double.toString(niceFormat(yrTx)));
+        sMF.setText("Loan-less costs: $" + Double.toString(niceFormat(mnthFee)));
+        tMC.setText("Total Mortgage: $" + Double.toString(niceFormat(totalMortgage)));
+        tMP.setText("Total Monthly Payment: $" + Double.toString(niceFormat(totalMonthlyPayment(mnthFee,totalMortgage,loanTerm))));
+        pD.setText("Mortgage paid by: " + Integer.toString(startMonth) + "/" + Integer.toString(startYear + loanTerm));
+            }
 
     }
-}

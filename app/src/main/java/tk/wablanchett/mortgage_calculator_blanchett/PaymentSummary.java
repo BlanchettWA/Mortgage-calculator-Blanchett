@@ -38,7 +38,7 @@ public class PaymentSummary extends AppCompatActivity {
     public double mortgageTotal(double loanAmount, double interestRate, int numpayments)
     {
         double waypoint = (loanAmount * ((interestRate/12.0) * (Math.pow((1 + (interestRate/12.0)),numpayments))));
-        return (waypoint / ((Math.pow((1 + (interestRate/12.0)),numpayments)) - 1 ));
+        return (loanAmount + (waypoint / ((Math.pow((1 + (interestRate/12.0)),numpayments)) - 1 )));
     }
 
     public double niceFormat(double value){
@@ -48,9 +48,40 @@ public class PaymentSummary extends AppCompatActivity {
 
     public String biweekdate(double totalMortgage, int loanTerm)
     {
-        int numyears = (loanTerm*26);
+        System.out.println("Stepping through execution of date method");
 
-        return "TO BE dETERMENED";
+        double paymentamount = (totalMortgage/(loanTerm*26));
+        System.out.println("Payment amount is :" + paymentamount);
+
+        double amountpaidinYear = (26 * paymentamount);
+        System.out.println("Amount paid in a year is: " + amountpaidinYear);
+
+        int nYears = (int) Math.ceil(totalMortgage / amountpaidinYear);
+        System.out.println("Number of years then becomes " + nYears);
+
+        double remainder = (totalMortgage - (nYears * amountpaidinYear));
+        System.out.println("Remainder is " + remainder);
+
+        int payments = (int)Math.ceil(remainder / paymentamount);
+        System.out.println("Thre should be this many payments left:" + payments);
+
+
+        int daysleft = (payments*14);
+        System.out.println("That gives us this many days: " + daysleft);
+
+
+        int nmonths = (int) Math.ceil(daysleft / 30.0);
+        System.out.println("This many months: " + nmonths);
+
+
+        int endYear = startYear + nYears;
+
+
+        int endMonth = (startMonth - 1) + nmonths;
+
+        endMonth = (endMonth + 1);
+
+        return ("Mortgage paid by: " + endMonth + "/" + endYear);
     }
 
     @Override
@@ -97,7 +128,7 @@ public class PaymentSummary extends AppCompatActivity {
 
 
         monthlyPayoff.setText("Mortgage paid by: " + Integer.toString(startMonth) + "/" + Integer.toString(startYear + loanTerm));
-        biweeklyPayoff.setText("Mortgage paid by: " + biweekdate(totalbiweeklyMortgage,loanTerm));
+        biweeklyPayoff.setText(biweekdate(totalbiweeklyMortgage,loanTerm));
 
 
 
@@ -138,14 +169,51 @@ public class PaymentSummary extends AppCompatActivity {
         });
 
 
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putDouble("HV",homeValue);
+        outState.putDouble("LA", loanAmount);
+        outState.putDouble("IR",interestRate);
+        outState.putInt("LT",loanTerm);
+        outState.putInt("SM",startMonth);
+        outState.putInt("SY", startYear);
+        outState.putDouble("PT", propertyTax);
+        outState.putDouble("IPY", insurancePerYear);
+        outState.putDouble("MHOA", monthlyHOA);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        homeValue = savedInstanceState.getDouble("HV",homeValue);
+        loanAmount = savedInstanceState.getDouble("LA", loanAmount);
+        interestRate = savedInstanceState.getDouble("IR",interestRate);
+        loanTerm = savedInstanceState.getInt("LT",loanTerm);
+        startMonth = savedInstanceState.getInt("SM",startMonth);
+        startYear = savedInstanceState.getInt("SY", startYear);
+        propertyTax = savedInstanceState.getDouble("PT", propertyTax);
+        insurancePerYear = savedInstanceState.getDouble("IPY", insurancePerYear);
+        monthlyHOA = savedInstanceState.getDouble("MHOA", monthlyHOA);
+
+        totalMonthlyMortgage = mortgageTotal(loanAmount,interestRate,(loanTerm*12));
+        totalbiweeklyMortgage = mortgageTotal(loanAmount,interestRate,(loanTerm*26));
 
 
+        numMonthlyPayments.setText(Integer.toString((loanTerm*12)) + " payments");
+        numBiweeklyPayment.setText(Integer.toString((loanTerm*26)) + " payments");
+
+        monthlyPayment.setText("Payment: $" + niceFormat((totalMonthlyMortgage/(loanTerm*12))));
+        biweeklyPayment.setText("Payment: $" + niceFormat((totalbiweeklyMortgage/(loanTerm*26))));
+
+        monthlyinterest.setText("Interest: $" + niceFormat(totalMonthlyMortgage - loanAmount));
+        biweeklyinterest.setText("Interest: $" + niceFormat(totalbiweeklyMortgage - loanAmount));
 
 
-
-
-
-
-
+        monthlyPayoff.setText("Mortgage paid by: " + Integer.toString(startMonth) + "/" + Integer.toString(startYear + loanTerm));
+        biweeklyPayoff.setText(biweekdate(totalbiweeklyMortgage,loanTerm));
     }
 }
+
